@@ -1,0 +1,52 @@
+media:
+  input: assets
+  output: assets
+  categories: [image]
+content:
+  - name: studio
+    label: 브랜드 · 포트폴리오 · 글
+    type: file
+    path: studio.json
+    format: json
+    fields:
+      - name: brand
+        label: 브랜드
+        type: object
+        fields:
+          - {name: ko, label: 한글 이름, type: string, required: true}
+          - {name: en, label: 영문 이름, type: string, required: true}
+          - {name: hero, label: 대표 사진, type: image, required: true}
+          - {name: intro, label: 소개 문구, type: text, required: true}
+      - name: cases
+        label: 포트폴리오와 실적
+        type: object
+        list: true
+        fields:
+          - {name: title, label: 사례명, type: string, required: true}
+          - {name: id, label: '고유 주소 (영문 소문자·숫자·하이픈)', type: string, required: true, pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'}
+          - {name: status, label: 사례 구분, type: select, default: 기획 샘플, options: {values: [기획 샘플, 수행 실적]}}
+          - {name: type, label: 업종, type: select, required: true, options: {values: [카페, 음식점, 소매점]}}
+          - {name: size, label: 면적(평), type: number, required: true}
+          - {name: photo, label: 공간 사진, type: image, required: true}
+          - {name: alt, label: 사진 설명, type: string, required: true}
+          - {name: background, label: 의뢰 배경, type: text}
+          - {name: question, label: 공간에서 풀 질문, type: text}
+          - {name: layout, label: 배치 제안, type: text}
+          - {name: board, label: 무드보드, type: image}
+          - {name: mood, label: 무드보드 설명, type: text}
+          - name: chips
+            label: 색상칩
+            type: object
+            list: true
+            fields:
+              - {name: name, label: 소재 또는 색상명, type: string}
+              - {name: color, label: 색상, type: string, pattern: '^#[0-9a-fA-F]{6}$'}
+      - name: posts
+        label: 스튜디오 글
+        type: object
+        list: true
+        fields:
+          - {name: title, label: 제목, type: string, required: true}
+          - {name: body, label: 본문, type: text, required: true}
+          - {name: photo, label: 사진, type: image}
+          - {name: alt, label: 사진 설명, type: string}
